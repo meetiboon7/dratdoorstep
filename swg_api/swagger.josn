@@ -1,0 +1,2472 @@
+openapi: 3.0.0
+info:
+  title: 'DADS API'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8080/DADS_Web/api'
+  -
+    url: 'http://localhost/DADS_Web/api'
+  -
+    url: 'https://deviboon.dratdoorstep.com/api'
+paths:
+  /about:
+    get:
+      tags:
+        - About
+      summary: About
+      description: ''
+      operationId: getAbout
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /blog:
+    get:
+      tags:
+        - Blog
+      summary: Blog
+      description: ''
+      operationId: getBlog
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /cart:
+    get:
+      tags:
+        - Cart
+      summary: 'Cart Details'
+      description: ''
+      operationId: getCart
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/cart/delete/{cart_id}':
+    delete:
+      tags:
+        - Cart
+      summary: 'Delete Cart Details'
+      description: ''
+      operationId: deleteCartDetails
+      parameters:
+        -
+          $ref: '#/components/parameters/cart_id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Delete Cart Details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /cart/getPaymentToken:
+    post:
+      tags:
+        - Cart
+      summary: Amount
+      description: ''
+      operationId: getPaymentToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentGetwayRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert amount'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /cart/setPaymentResponse:
+    post:
+      tags:
+        - Cart
+      summary: 'Payment Response'
+      description: ''
+      operationId: setPaymentResponse
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetPaymentResponse'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert payment response'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /city:
+    get:
+      tags:
+        - City
+      summary: City
+      description: ''
+      operationId: getCity
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /country:
+    get:
+      tags:
+        - Country
+      summary: Country
+      description: ''
+      operationId: getCountry
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /doctor_type:
+    get:
+      tags:
+        - 'Doctor Type'
+      summary: 'Doctor Type'
+      description: ''
+      operationId: getDoctorType
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /feedback_option:
+    get:
+      tags:
+        - 'Feedback Option'
+      summary: 'Feedback Option'
+      description: ''
+      operationId: getFeedbackOption
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /feedback_services:
+    get:
+      tags:
+        - 'Feeback Services'
+      summary: 'Feedback Services'
+      description: ''
+      operationId: getFeedbackServices
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /help:
+    get:
+      tags:
+        - Help
+      summary: Help
+      description: ''
+      operationId: getHelp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /lab_test_type:
+    get:
+      tags:
+        - 'Lab Test Type'
+      summary: 'Lab Test Type'
+      description: ''
+      operationId: getLabTestType
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /service_type:
+    get:
+      tags:
+        - 'Nurse Service Type'
+      summary: 'Nurse Service Type'
+      description: ''
+      operationId: getServiceType
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /state:
+    get:
+      tags:
+        - State
+      summary: State
+      description: ''
+      operationId: getState
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /terms_condition:
+    get:
+      tags:
+        - 'Terms & Condition'
+      summary: 'Terms & Condition'
+      description: ''
+      operationId: getTermsCondition
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /login:
+    post:
+      tags:
+        - Authentication
+      operationId: Login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Either email or password incorrect'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+  /forgot_api:
+    post:
+      tags:
+        - Authentication
+      operationId: 'Forgot Api'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Either email or password incorrect'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+  /change_password:
+    post:
+      tags:
+        - Authentication
+      operationId: 'Change Password'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Either email or password incorrect'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /address/get:
+    get:
+      tags:
+        - Address
+      summary: 'get Address Details'
+      description: ''
+      operationId: getAddressDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /address/add:
+    post:
+      tags:
+        - Address
+      summary: 'Add Address Details'
+      description: ''
+      operationId: postAddress
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert Address profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/address/update/{address_id}':
+    post:
+      tags:
+        - Address
+      summary: 'Update Address Details'
+      description: ''
+      operationId: putAddress
+      parameters:
+        -
+          $ref: '#/components/parameters/address_id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressRequestUpdate'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Update Address Details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/address/delete/{address_id}':
+    delete:
+      tags:
+        - Address
+      summary: 'Delete Address Details'
+      description: ''
+      operationId: deleteAddress
+      parameters:
+        -
+          $ref: '#/components/parameters/address_id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Delete Address Details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /doctor/add:
+    post:
+      tags:
+        - Appointment
+      summary: 'Add Doctor Appointment'
+      description: ''
+      operationId: postDoctorAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Doctor Appointment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /nurse/add:
+    post:
+      tags:
+        - Appointment
+      summary: 'Add Nurse Appointment'
+      description: ''
+      operationId: postNurseAppointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NurseRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Nurse Appointment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /lab/add:
+    post:
+      tags:
+        - Appointment
+      summary: 'Add Lab Appointment'
+      description: ''
+      operationId: postLabAppointment
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LabRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert Lab Appointment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /pharmacy/add:
+    post:
+      tags:
+        - Appointment
+      summary: 'Add Pharmacy Appointment'
+      description: ''
+      operationId: postPharmacyAppointment
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PharmacyRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert Pharmacy Appointment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /ambulance/one_way:
+    post:
+      tags:
+        - Appointment
+      summary: 'Ambulance OneWay'
+      description: ''
+      operationId: postAmbulanceOneWay
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AmbulanceOneWay'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Ambulance Appointment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /ambulance/round_trip:
+    post:
+      tags:
+        - Appointment
+      summary: 'Ambulance RoundTrip'
+      description: ''
+      operationId: postAmbulanceRoundTrip
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AmbulanceOneWay'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Ambulance Appointment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /ambulance/multi_location:
+    post:
+      tags:
+        - Appointment
+      summary: 'Ambulance MultiLocation'
+      description: ''
+      operationId: postAmbulanceMultiLocation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AmbulanceMultiLocation'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Ambulance Appointment'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/doctor/update/{id}':
+    post:
+      tags:
+        - Appointment
+      summary: 'Update Appointment Details'
+      description: ''
+      operationId: putAppointmebt
+      parameters:
+        -
+          $ref: '#/components/parameters/id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DoctorRequestUpdate'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Update Appointment Details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/appointment_booking_history/booking_history/{service_id}':
+    post:
+      tags:
+        - 'Booking History'
+      summary: 'Appointment Booking History'
+      description: ''
+      operationId: postAppointmentBookingHistory
+      parameters:
+        -
+          $ref: '#/components/parameters/service_id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to List Booking History'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /visit_history/appoinment:
+    post:
+      tags:
+        - 'Booking History'
+      summary: 'Appoinment Visit Details'
+      description: ''
+      operationId: postAppointmentHistory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitAppointmentRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to show Appointment Details profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /complain/get:
+    get:
+      tags:
+        - 'Complain & Feedback'
+      summary: 'get Complain & Feedback Details'
+      description: ''
+      operationId: getComplainAndFeedback
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /complain/add:
+    post:
+      tags:
+        - 'Complain & Feedback'
+      summary: 'Add Complain & Feedback Details'
+      description: ''
+      operationId: postComplain
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ComplainRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert Complain'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /member/get:
+    get:
+      tags:
+        - Members
+      summary: 'Member Record'
+      description: ''
+      operationId: getMemberDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /member/add:
+    post:
+      tags:
+        - Members
+      summary: 'Add Member Profile'
+      description: ''
+      operationId: postMemberProfile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MemberRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert member profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/member/update/{member_id}':
+    post:
+      tags:
+        - Members
+      summary: 'Update Member Profile'
+      description: ''
+      operationId: putMemberProfile
+      parameters:
+        -
+          $ref: '#/components/parameters/member_id'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/MemberRequestUpdate'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Update member profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/member/delete/{member_id}':
+    delete:
+      tags:
+        - Members
+      summary: 'Delete Member Profile'
+      description: ''
+      operationId: deleteMemberProfile
+      parameters:
+        -
+          $ref: '#/components/parameters/member_id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Delete member profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /mybook_package/get:
+    get:
+      tags:
+        - 'My Book Package'
+      summary: 'My Book Package Record'
+      description: ''
+      operationId: getMyBookPackageDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  '/mybook_package/visit_history/{book_package_id}':
+    post:
+      tags:
+        - 'My Book Package'
+      summary: 'Visit History'
+      description: ''
+      operationId: putVisitHistory
+      parameters:
+        -
+          $ref: '#/components/parameters/book_package_id'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Update member profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /mybook_package/book_visit:
+    post:
+      tags:
+        - 'My Book Package'
+      summary: 'Book Visit'
+      description: ''
+      operationId: postBook_visit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookVisitRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Package Book'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /Notification/get:
+    get:
+      tags:
+        - Notification
+      summary: Notification
+      description: ''
+      operationId: getNotification
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to send Notification'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /Notification/getPushNotificationToken:
+    post:
+      tags:
+        - Notification
+      summary: Token
+      description: ''
+      operationId: pushNotificationtoken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PushNotificationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert token'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /package/get:
+    get:
+      tags:
+        - Package
+      summary: 'Package Record'
+      description: ''
+      operationId: getPackageDetails
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /package/book:
+    post:
+      tags:
+        - Package
+      summary: 'Package Book'
+      description: ''
+      operationId: postPackageBook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PackageRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Package Book'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /profile:
+    get:
+      tags:
+        - User
+      summary: 'User Profile'
+      description: ''
+      operationId: getMyProfile
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /profile/update:
+    post:
+      tags:
+        - User
+      summary: 'Update User Profile'
+      description: ''
+      operationId: putUserProfile
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ProfileRequestUpdate'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to Update user profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /PromoCode/get:
+    get:
+      tags:
+        - 'Promo Code'
+      summary: 'get Promo Code Details'
+      description: ''
+      operationId: getPromoCode
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /PromoCode/add:
+    post:
+      tags:
+        - 'Promo Code'
+      summary: 'Validate Promo Code'
+      description: ''
+      operationId: postPromoCode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromoCodeRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert Address profile'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /registration:
+    post:
+      tags:
+        - Authentication
+      operationId: Registration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Either email or password incorrect'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+  /wallet/get:
+    get:
+      tags:
+        - Wallet
+      summary: 'get Wallet'
+      description: ''
+      operationId: getWallet
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /wallet_deduction/get:
+    get:
+      tags:
+        - Wallet
+      summary: 'Wallet Deduction'
+      description: ''
+      operationId: getWalletDeduction
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /wallet/getWalletPaymentToken:
+    post:
+      tags:
+        - Wallet
+      summary: 'Wallet Amount'
+      description: ''
+      operationId: getWalletPaymentToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentWalletGetwayRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert amount'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+  /wallet/setWalletPaymentRequest:
+    post:
+      tags:
+        - Wallet
+      summary: 'Wallet Payment'
+      description: ''
+      operationId: setWalletPaymentRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetWalletPaymentRequest'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '400':
+          description: 'Unable to insert wallet payment request'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '401':
+          description: 'Invalid/unauthorized token or token not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+        '412':
+          description: 'Parameters missing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Api_Response'
+      security:
+        -
+          dads_auth: []
+components:
+  schemas:
+    AddressRequest:
+      required:
+        - address_1
+        - address_2
+        - city_id
+        - state_id
+        - country_id
+        - pincode
+      properties:
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city_id:
+          type: integer
+        state_id:
+          type: integer
+        country_id:
+          type: integer
+        pincode:
+          type: integer
+      type: object
+    AddressRequestUpdate:
+      required:
+        - address_1
+        - address_2
+        - city_id
+        - state_id
+        - country_id
+        - pincode
+      properties:
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city_id:
+          type: integer
+        state_id:
+          type: integer
+        country_id:
+          type: integer
+        pincode:
+          type: integer
+      type: object
+    AddressRequestDelete:
+      required:
+        - address_id
+      properties:
+        address_id:
+          type: integer
+      type: object
+    DoctorRequest:
+      required:
+        - patient_id
+        - address_id
+        - doctor_type_id
+        - date
+        - time
+      properties:
+        patient_id:
+          type: integer
+        address_id:
+          type: integer
+        complain:
+          type: string
+        doctor_type_id:
+          type: integer
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+      type: object
+    DoctorRequestUpdate:
+      properties:
+        patient_id:
+          type: integer
+        address_id:
+          type: integer
+        complain:
+          type: string
+        doctor_type_id:
+          type: integer
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+      type: object
+    NurseRequest:
+      required:
+        - patient_id
+        - address_id
+        - doctor_type_id
+        - date
+        - time
+      properties:
+        patient_id:
+          type: integer
+        address_id:
+          type: integer
+        complain:
+          type: string
+        nurse_service_id:
+          type: integer
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+        days:
+          type: integer
+      type: object
+    LabRequest:
+      required:
+        - patient_id
+        - address_id
+        - lab_test_id
+        - date
+        - time
+      properties:
+        patient_id:
+          type: integer
+        address_id:
+          type: integer
+        lab_test_id:
+          type: integer
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+        complain:
+          type: string
+        prescription:
+          type: string
+          format: binary
+      type: object
+    PharmacyRequest:
+      required:
+        - contact_name
+        - contact_no
+        - city_id
+        - address
+        - prescription
+      properties:
+        contact_name:
+          type: string
+        contact_no:
+          type: number
+        landline_number:
+          type: string
+        city_id:
+          type: integer
+        address:
+          type: string
+        prescription:
+          type: string
+          format: binary
+      type: object
+    AmbulanceOneWay:
+      required:
+        - patient_id
+        - city_id
+        - from_address
+        - to_address
+        - start_date
+        - start_time
+      properties:
+        patient_id:
+          type: integer
+        mobile_no:
+          type: number
+        landline_number:
+          type: string
+        city_id:
+          type: integer
+        from_address:
+          type: string
+        to_address:
+          type: string
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+      type: object
+    AmbulanceMultiLocation:
+      required:
+        - patient_id
+        - multi_location
+      properties:
+        patient_id:
+          type: integer
+        mobile_no:
+          type: number
+        landline_number:
+          type: string
+        multi_location:
+          type: string
+      type: object
+    VisitAppointmentRequest:
+      required:
+        - service_id
+        - appointment_id
+      properties:
+        service_id:
+          type: integer
+        appointment_id:
+          type: integer
+      type: object
+    BookVisitRequest:
+      required:
+        - book_package_id
+        - date
+        - time
+      properties:
+        book_package_id:
+          type: integer
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+      type: object
+    CartRequestDelete:
+      required:
+        - cart_id
+      properties:
+        cart_id:
+          type: integer
+      type: object
+    PaymentGetwayRequest:
+      required:
+        - amount
+      properties:
+        amount:
+          type: string
+      type: object
+    SetPaymentResponse:
+      required:
+        - payment_request
+      properties:
+        payment_request:
+          type: object
+        is_wallet_selected:
+          type: boolean
+        discount:
+          type: string
+      type: object
+    ComplainRequest:
+      required:
+        - feedback_options_id
+        - feedback_services_id
+        - feedback
+      properties:
+        feedback_options_id:
+          type: integer
+        feedback_services_id:
+          type: integer
+        problem:
+          type: string
+      type: object
+    LoginRequest:
+      properties:
+        email_or_mobile:
+          type: string
+        pin:
+          type: integer
+      type: object
+    ForgotRequest:
+      properties:
+        email_or_mobile:
+          type: string
+      type: object
+    ChangePasswordRequest:
+      required:
+        - old_pin
+        - new_pin
+        - confirm_pin
+      properties:
+        old_pin:
+          type: integer
+        new_pin:
+          type: integer
+        confirm_pin:
+          type: integer
+      type: object
+    MemberRequest:
+      required:
+        - name
+        - contact_no
+        - city_id
+        - gender
+        - date_of_birth
+      properties:
+        name:
+          type: string
+        contact_no:
+          type: number
+        city_id:
+          type: integer
+        gender:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        mem_pic:
+          type: string
+          format: binary
+      type: object
+    MemberRequestUpdate:
+      required:
+        - name
+        - contact_no
+        - city_id
+        - gender
+        - date_of_birth
+      properties:
+        name:
+          type: string
+        contact_no:
+          type: number
+        city_id:
+          type: integer
+        gender:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        mem_pic:
+          type: string
+          format: binary
+      type: object
+    MemberRequestDelete:
+      required:
+        - member_id
+      properties:
+        member_id:
+          type: integer
+      type: object
+    PushNotificationRequest:
+      required:
+        - token
+      properties:
+        token:
+          type: string
+        device_id:
+          type: string
+        device_type:
+          type: string
+      type: object
+    PackageRequest:
+      required:
+        - patient_id
+        - address_id
+        - service_id
+        - package_id
+        - fees
+      properties:
+        patient_id:
+          type: integer
+        address_id:
+          type: integer
+        user_id:
+          type: integer
+        service_id:
+          type: integer
+        package_id:
+          type: integer
+        fees:
+          type: integer
+      type: object
+    ProfileRequestUpdate:
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: number
+        email:
+          type: string
+        mobile:
+          type: integer
+        profile_pic:
+          type: string
+          format: binary
+      type: object
+    PromoCodeRequest:
+      required:
+        - promo_code
+        - cart_id
+      properties:
+        promo_code:
+          type: string
+        cart_id:
+          type: array
+          items:
+            type: integer
+            format: int32
+      type: object
+    RegistrationRequest:
+      properties:
+        email:
+          type: string
+        mobile:
+          type: integer
+        pin:
+          type: integer
+        referral_code:
+          type: string
+      type: object
+    PaymentWalletGetwayRequest:
+      required:
+        - amount
+      properties:
+        amount:
+          type: string
+      type: object
+    SetWalletPaymentRequest:
+      required:
+        - payment_request
+      properties:
+        payment_request:
+          type: object
+      type: object
+    AddressDetails:
+      properties:
+        address_id:
+          type: integer
+        user_id:
+          type: integer
+        address_1:
+          type: string
+        address_2:
+          type: string
+        city_id:
+          type: integer
+        state_id:
+          type: integer
+        country_id:
+          type: integer
+        pincode:
+          type: integer
+      type: object
+    Api_Response:
+      properties:
+        status:
+          type: boolean
+        message:
+          type: string
+        data:
+          type: object
+      type: object
+    AppointmentType:
+      properties:
+        patient_id:
+          type: integer
+        user_id:
+          type: integer
+        doctor_type_id:
+          type: integer
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+        prescription:
+          type: string
+      type: object
+    PharmacyType:
+      properties:
+        contact_name:
+          type: string
+        contact_no:
+          type: number
+        landline_number:
+          type: string
+        city_id:
+          type: integer
+        address:
+          type: string
+        prescription:
+          type: string
+          format: binary
+      type: object
+    BookVisitResponse:
+      properties:
+        book_package_id:
+          type: integer
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+      type: object
+    Cart:
+      properties:
+        cart_id:
+          type: integer
+      type: object
+    ComplainDetails:
+      properties:
+        feedback_id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        mobile:
+          type: number
+        feedback_services_id:
+          type: integer
+        problem:
+          type: string
+        date:
+          type: string
+        user_id:
+          type: integer
+        feedback_options_id:
+          type: integer
+      type: object
+    LoginResponse:
+      properties:
+        user_token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      type: object
+    MemberProfile:
+      properties:
+        member_id:
+          type: integer
+        user_id:
+          type: integer
+        name:
+          type: string
+        contact_no:
+          type: number
+        city_id:
+          type: integer
+        gender:
+          type: string
+        date_of_birth:
+          type: string
+          format: date
+        mem_pic:
+          type: string
+      type: object
+    PackageResponse:
+      properties:
+        package_id:
+          type: integer
+        package_code:
+          type: string
+        city_id:
+          type: integer
+        service_id:
+          type: integer
+        package_name:
+          type: string
+        description:
+          type: string
+        fees:
+          type: integer
+        no_visit:
+          type: number
+        validate_day:
+          type: number
+        purchase_date:
+          type: string
+          format: date
+      type: object
+    PromoCodeDetails:
+      properties:
+        promo_code:
+          type: string
+      type: object
+    Registration_Response:
+      properties:
+        user_token:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      type: object
+    User:
+      properties:
+        email:
+          type: string
+        mobile:
+          type: integer
+        user_type_id:
+          type: integer
+        user_id:
+          type: integer
+      type: object
+    WalletDetails:
+      properties:
+        recharge_id:
+          type: integer
+        amt:
+          type: integer
+      type: object
+  parameters:
+    cart_id:
+      name: cart_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    address_id:
+      name: address_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    service_id:
+      name: service_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    member_id:
+      name: member_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    book_package_id:
+      name: book_package_id
+      in: path
+      required: true
+      schema:
+        type: integer
+    user_id:
+      name: user_id
+      in: path
+      required: true
+      schema:
+        type: integer
+  securitySchemes:
+    dads_auth:
+      type: http
+      name: dads_auth
+      in: header
+      bearerFormat: JWT
+      scheme: Bearer
+tags:
+  -
+    name: Authentication
+  -
+    name: User
