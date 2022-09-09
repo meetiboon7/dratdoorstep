@@ -632,7 +632,7 @@ class AppointmentList extends GeneralController {
 
              if($admin == '-1' || $dr_admin == '6' ||$front_office == '7' || $manager == '8')
             {
-                $this->db->select('package_booking.*,manage_package.package_name,user_type.user_type_name,member.name,book_package.book_package_id,book_package.address_id,add_address.address_id,add_address.address_1,add_address.address_2,book_package.responsestatus');
+                $this->db->select('package_booking.*,manage_package.package_name,user_type.user_type_name,member.name, book_package.confirm, book_package.responsestatus, book_package.book_package_id,book_package.address_id,add_address.address_id,add_address.address_1,add_address.address_2,book_package.responsestatus');
                 $this->db->from('package_booking');
                 $this->db->join('book_package','book_package.book_package_id = package_booking.book_package_id');
                 $this->db->join('manage_package','manage_package.package_id = package_booking.package_id');
@@ -3187,14 +3187,15 @@ class AppointmentList extends GeneralController {
 
 							 $confirm=$value['confirm'];
 							 $total=$value['total'];
-							 $paymentmode=$value['paymentmode'];
+							 $paymentmade=$value['paymentmade'];
 							 $discount=$value['discount'];
 							  $user_id=$value['user_id'];
 							
 						    # code...
 					}
+
 				if($total == 0){
-				if($paymentmode == 'credit')
+				if($paymentmade == 'credit')
 				     $total=$discount;
 				}
 				if($confirm == 1)
@@ -3287,7 +3288,7 @@ class AppointmentList extends GeneralController {
 			         }
 
 
-				  }
+				}
 		    }
 		    elseif($post['book_nurse_id']!='')
 			{
@@ -3301,14 +3302,14 @@ class AppointmentList extends GeneralController {
 
 							 $confirm=$value['confirm'];
 							 $total=$value['total'];
-							 $paymentmode=$value['paymentmode'];
+							 $paymentmade=$value['paymentmade'];
 							 $discount=$value['discount'];
 							  $user_id=$value['user_id'];
 							
 						    # code...
 					}
 				if($total == 0){
-				if($paymentmode == 'credit')
+				if($paymentmade == 'credit')
 				     $total=$discount;
 				}
 				if($confirm == 1)
@@ -3415,14 +3416,14 @@ class AppointmentList extends GeneralController {
 
 							 $confirm=$value['confirm'];
 							 $total=$value['total'];
-							 $paymentmode=$value['paymentmode'];
+							 $paymentmade=$value['paymentmade'];
 							 $discount=$value['discount'];
 							  $user_id=$value['user_id'];
 							
 						    # code...
 					}
 				if($total == 0){
-				if($paymentmode == 'credit')
+				if($paymentmade == 'credit')
 				     $total=$discount;
 				}
 				if($confirm == 1)
@@ -3469,6 +3470,120 @@ class AppointmentList extends GeneralController {
 	                             $mail_message = "
 								<p>Dear User, </p>
 								<p>We are sad that you cancelled your booking with id ".$post['book_laboratory_test_id'].". Refund for the same is now updated in your DrAtDoorstep account. Hope to see you again! </p>
+								<br><br><br><br><br><br>
+								<p> Regards,</p>
+								<p><b> Dratdoorstep</b></p>
+								";
+	                            $config['protocol'] = 'sendmail';
+	                            $config['mailpath'] = '/usr/sbin/sendmail';
+
+	                            $config['mailtype'] = 'html'; // or html
+	                      //  $this->load->library('email');
+	                      //  $this->email->from('no-reply@example.com');
+	                            $this->email->initialize($config);
+
+	                            //$this->email->from('no-reply@portal.dratdoorstep.com','Dratdoorstep');
+	                            $this->email->from('info@dratdoorstep.com','Dratdoorstep');
+	                            $this->email->to($email);
+	                            $this->email->subject('DratDoorStep');
+	                            $this->email->message($mail_message);
+	                              
+	                            if ($this->email->send()) 
+	                            {
+
+	                                   //redirect(BookingHistory)
+	                            	$this->session->set_flashdata('message','Your appointment has been cancelled successfully!!');
+	                                   redirect(base_url().'adminAppointmentList');
+	                            }
+	                            else 
+	                            {
+	                                    $this->session->set_flashdata('message','Something went wrong.');
+	                                    redirect(base_url().'adminAppointmentList');
+	                            }
+	                                       // redirect(base_url());
+			            }
+			            else
+			            {
+							$this->session->set_flashdata('message','Address is updated.');
+	                        redirect(base_url().'adminAppointmentList');
+
+			            }
+			         }
+			         else
+			         {
+			         		$this->session->set_flashdata('message','This appointment has already been cancelled!!.');
+	                        redirect(base_url().'adminAppointmentList');
+			         }
+
+
+				  }
+		    }
+			elseif($post['id']!='')
+			{
+					$this->db->select('package_booking.*, book_package.*');
+					$this->db->from('package_booking');
+					$this->db->join('book_package','book_package.book_package_id = package_booking.book_package_id');
+					$this->db->where('id',$post['id']);
+					$this->db->order_by('id', 'DESC');
+					$appointment_book= $this->db->get()->result_array();
+					// echo $this->db->last_query();
+					// exit;
+					foreach ($appointment_book as $value) {
+
+							 $confirm=$value['confirm'];
+							 $total=$value['total'];
+							 $paymentmade=$value['paymentmade'];
+							 $discount=$value['discount'];
+							  $user_id=$value['user_id'];
+							
+						    # code...
+					}
+				if($total == 0){
+				if($paymentmade == 'credit')
+				     $total=$discount;
+				}
+				if($confirm == 1)
+				{
+
+					 $this->db->where('book_package_id',$value['book_package_id']);
+					 
+	                 if($this->db->update('book_package',array('cancel' =>date('Y-m-d'),'confirm' => 0,'responsestatus' => 'TXN_CANCELLED')))
+			        {
+		                $this->db->select('*');
+	                    $this->db->from('user');
+	                    $this->db->where('user_id',$user_id);
+	                    $user_details = $this->db->get()->result_array();
+	                    
+	                    foreach ($user_details as $value) {
+
+							 $bal=$value['balance'];
+							 $mobile=$value['mobile'];
+							 $email=$value['email'];
+						
+					  
+						}
+					    
+					    $cur=$bal+$total;
+					    $this->db->where('user_id',$user_id);
+					   // $this->db->update('user',array('cancel'=>date('Y-m-d'),'balance'=>$cur));
+					  //  echo $this->db->last_query();
+					   // exit;
+	                    if($this->db->update('user',array('balance'=>$cur)))
+			            {
+			            		$message = urlencode("We are sad that you cancelled your booking with id ".$value['book_package_id'].". Refund for the same is now updated in your DrAtDoorstep account. Hope to see you again!");
+	                    		
+	                    		$this->db->select('*');
+			                    $this->db->from('sms_detail');
+			                    $sms_detail = $this->db->get()->result_array();
+
+	                            $smsurl="http://".$sms_detail[0]['host']."/api/pushsms?user=".$sms_detail[0]['user_name']."&authkey=".$sms_detail[0]['authkey']."&sender=".$sms_detail[0]['sender_id']."&mobile=".$mobile."&text=".$message."&output=json";
+	                                    $response = file_get_contents($smsurl);
+
+	                            $this->load->library('email');
+
+	                             $mail_message = "
+								<p>Dear User, </p>
+								<p>We are sad that you cancelled your booking with id ".$value['book_package_id'].". Refund for the same is now updated in your DrAtDoorstep account. Hope to see you again! </p>
 								<br><br><br><br><br><br>
 								<p> Regards,</p>
 								<p><b> Dratdoorstep</b></p>
