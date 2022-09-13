@@ -728,6 +728,9 @@ $route['assingPackageAppointment'] = 'admin/BookPackage/assingPackageAppointment
 $route['assign_package_list'] = 'admin/AssignPackageList';
 $route['invoice_assign']  = 'admin/AssignPackageList/package_invoice_recipt';
 
+// All Patient Report
+$route['All_Patient_Report'] = 'admin/AllPatientReport';
+$route['generateAllPatientReport'] = 'admin/AllPatientReport/generateAllPatientReport';
 
 //
 $route['update_appointment'] =  'admin/PackageBook/update_single_appointment';
