@@ -71,7 +71,8 @@ class AllPatientReport extends GeneralController {
 		LEFT JOIN lab_test_type ON lab_test_type.lab_test_id = book_laboratory_test.lab_test_id
 		LEFT JOIN book_ambulance ON book_ambulance.book_ambulance_id = extra_invoice.book_ambulance_id
 		LEFT JOIN city ON city.city_id = member.city_id
-		WHERE DATE( extra_invoice.date ) BETWEEN  '$start_date' AND  '$end_date'");
+		WHERE DATE( extra_invoice.date ) BETWEEN  '$start_date' AND  '$end_date'
+		ORDER BY extra_invoice.date DESC");
         $setSql = $query->result_array();
         $exceldata = array();
 		if(count($setSql)>0)

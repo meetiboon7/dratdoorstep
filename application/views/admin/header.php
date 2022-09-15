@@ -250,6 +250,14 @@
 						<span class="menu-text">W3C Report</span>
 					</a>
 				</li>
+				<li class="menu-item" aria-haspopup="true">
+					<a href="<?php echo base_url() . 'All_Patient_Report' ?>" class="menu-link">
+						<i class="menu-bullet menu-bullet-dot">
+							<span></span>
+						</i>
+						<span class="menu-text">All Patient Report</span>
+					</a>
+				</li>
 				<!-- <li class="menu-item" aria-haspopup="true">
 															<a href="<?php echo base_url() . 'adminCityWiseAppointment' ?>" class="menu-link">
 																<i class="menu-bullet menu-bullet-dot">
@@ -306,14 +314,6 @@
 							<span></span>
 						</i>
 						<span class="menu-text">TeleConsulting Report</span>
-					</a>
-				</li>
-				<li class="menu-item" aria-haspopup="true">
-					<a href="<?php echo base_url() . 'All_Patient_Report' ?>" class="menu-link">
-						<i class="menu-bullet menu-bullet-dot">
-							<span></span>
-						</i>
-						<span class="menu-text">All Patient Report</span>
 					</a>
 				</li>
 			<?php
