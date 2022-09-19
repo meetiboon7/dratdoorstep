@@ -41,6 +41,7 @@ class AllPatientReport extends GeneralController {
 		$this->load->view('admin/AllPatientReport', $data);
 		$this->load->view(FOOTER);
 	}
+
 	public function generateAllPatientReport(){
 
 		$post = $this->input->post(NULL, true);
@@ -60,27 +61,32 @@ class AllPatientReport extends GeneralController {
 		$this->excel->getActiveSheet()->setCellValue('H1', 'City');
 		$this->excel->getActiveSheet()->setCellValue('I1', 'Service provider name');
 
-		$query = $this->db->query("SELECT extra_invoice.date, member.name, member.contact_no, extra_invoice.list, member.address, IF(extra_invoice.type != '' , 'DONE', 'CANCEL'), extra_invoice.price, city.city, IF(extra_invoice.appointment_book_id != 0 , 'Doctor', IF(extra_invoice.book_nurse_id != 0 , 'Nurse', IF(extra_invoice.book_laboratory_test_id != 0 , 'Laboratory', IF(extra_invoice.book_ambulance_id != 0 , 'Ambulance', NULL)))) AS service_name
+		// $query = $this->db->query("SELECT extra_invoice.date, member.name, member.contact_no, extra_invoice.list, CONCAT_WS('', add_address.address_1, '', add_address.address_2) AS address, IF(extra_invoice.type != '' , 'DONE', 'CANCEL'), extra_invoice.price, city.city, employee_master.first_name
+		// FROM extra_invoice 
+		// LEFT JOIN member ON member.member_id = extra_invoice.patient_id 
+		// LEFT JOIN add_address ON add_address.user_id = member.user_id 
+		// LEFT JOIN city ON city.city_id = member.city_id
+		// LEFT JOIN assign_appointment ON assign_appointment.patient_id = member.member_id 
+		// LEFT JOIN employee_master ON employee_master.emp_id = assign_appointment.emp_id
+		// WHERE DATE( extra_invoice.date ) BETWEEN '2022-08-01' AND '2022-08-10' AND member.status = '1' AND add_address.status = '1'
+		// ORDER BY extra_invoice.date DESC;");
+		
+		$query = $this->db->query("SELECT extra_invoice.date, member.name, member.contact_no, extra_invoice.list, CONCAT_WS('', add_address.address_1, '', add_address.address_2) AS address, IF(extra_invoice.type != '' , 'DONE', 'CANCEL'), extra_invoice.price, city.city, IF(extra_invoice.appointment_book_id != 0 , 'Doctor', IF(extra_invoice.book_nurse_id != 0 , 'Nurse', IF(extra_invoice.book_laboratory_test_id != 0 , 'Laboratory', IF(extra_invoice.book_ambulance_id != 0 , 'Ambulance', NULL)))) AS service_name
 		FROM extra_invoice
 		LEFT JOIN member ON member.member_id = extra_invoice.patient_id
-		LEFT JOIN user ON user.user_id = member.member_id 
-		LEFT JOIN appointment_book ON appointment_book.appointment_book_id = extra_invoice.appointment_book_id
-		LEFT JOIN book_nurse ON book_nurse.book_nurse_id = extra_invoice.book_nurse_id
-		LEFT JOIN nurse_service_type ON nurse_service_type.nurse_service_id = book_nurse.type
-		LEFT JOIN book_laboratory_test ON book_laboratory_test.book_laboratory_test_id = extra_invoice.book_laboratory_test_id
-		LEFT JOIN lab_test_type ON lab_test_type.lab_test_id = book_laboratory_test.lab_test_id
-		LEFT JOIN book_ambulance ON book_ambulance.book_ambulance_id = extra_invoice.book_ambulance_id
+		LEFT JOIN add_address ON add_address.user_id = member.user_id
 		LEFT JOIN city ON city.city_id = member.city_id
-		WHERE DATE( extra_invoice.date ) BETWEEN  '$start_date' AND  '$end_date'
+		WHERE DATE( extra_invoice.date ) BETWEEN '$start_date' AND '$end_date' AND member.status = '1' AND add_address.status = '1'
 		ORDER BY extra_invoice.date DESC");
         $setSql = $query->result_array();
+
         $exceldata = array();
 		if(count($setSql)>0)
 		{
 	       foreach ($setSql as $row){
 	            $exceldata[] = $row;
 	        }
-		} 
+		}
 		else
 		{
 			$exceldata[]= "no matching records found";
@@ -96,10 +102,10 @@ class AllPatientReport extends GeneralController {
         $this->excel->getActiveSheet()->getStyle('G3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $this->excel->getActiveSheet()->getStyle('H3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $this->excel->getActiveSheet()->getStyle('I3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-		
+
         $filename='All_Patient'; //save our workbook as this file name
         header('Content-Type: application/vnd.ms-excel'); //mime type
-        // header('Content-Disposition: attachment;filename="'.$filename.'"'); 
+        // header('Content-Disposition: attachment;filename="'.$filename.'"');
         header("Content-Disposition: attachment; filename=".$filename."_Reoprt.xls");
         //tell browser what's the file name
         header('Cache-Control: max-age=0'); //no cache
