@@ -632,15 +632,28 @@ class AppointmentList extends GeneralController {
 
              if($admin == '-1' || $dr_admin == '6' ||$front_office == '7' || $manager == '8')
             {
-                $this->db->select('package_booking.*,manage_package.package_name,user_type.user_type_name,member.name, book_package.confirm, book_package.responsestatus, book_package.book_package_id,book_package.address_id,add_address.address_id,add_address.address_1,add_address.address_2,book_package.responsestatus');
-                $this->db->from('package_booking');
-                $this->db->join('book_package','book_package.book_package_id = package_booking.book_package_id');
-                $this->db->join('manage_package','manage_package.package_id = package_booking.package_id');
-                $this->db->join('user_type','user_type.user_type_id = package_booking.service_id');
-                $this->db->join('member','member.member_id = package_booking.patient_id');
+				// OLD_QUERY
+                // $this->db->select('package_booking.*,manage_package.package_name,user_type.user_type_name,member.name, book_package.confirm, book_package.responsestatus, book_package.book_package_id,book_package.address_id,add_address.address_id,add_address.address_1,add_address.address_2,book_package.responsestatus');
+                // $this->db->from('package_booking');
+                // $this->db->join('book_package','book_package.book_package_id = package_booking.book_package_id');
+                // $this->db->join('manage_package','manage_package.package_id = package_booking.package_id');
+                // $this->db->join('user_type','user_type.user_type_id = package_booking.service_id');
+                // $this->db->join('member','member.member_id = package_booking.patient_id');
+                // $this->db->join('add_address','add_address.address_id = book_package.address_id');
+                // //$this->db->where('package_booking.service_id',$login_user_id);
+                // $this->db->order_by('package_booking.id', 'DESC');                        
+                // $data['appointment_book'] = $this->db->get()->result_array();
+				
+				// NEW_QUERY
+				$this->db->select('book_package.*, manage_package.package_name,user_type.user_type_name,member.name, add_address.address_id,add_address.address_1,add_address.address_2');
+                $this->db->from('book_package');
+                // $this->db->join('book_package','book_package.book_package_id = package_booking.book_package_id');
+                $this->db->join('manage_package','manage_package.package_id = book_package.package_id');
+                $this->db->join('user_type','user_type.user_type_id = book_package.service_id');
+                $this->db->join('member','member.member_id = book_package.patient_id');
                 $this->db->join('add_address','add_address.address_id = book_package.address_id');
                 //$this->db->where('package_booking.service_id',$login_user_id);
-                $this->db->order_by('package_booking.id', 'DESC');                        
+                $this->db->order_by('book_package.book_package_id', 'DESC');                        
                 $data['appointment_book'] = $this->db->get()->result_array();
 
                 // echo $this->db->last_query();

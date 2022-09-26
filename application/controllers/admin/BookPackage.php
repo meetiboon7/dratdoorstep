@@ -131,26 +131,31 @@ class BookPackage extends GeneralController {
 	{
 		parent::index();
 		
-// 		$this->db->select('book_package.*,member.name,manage_package.package_name');
-// 		$this->db->from('book_package');
-// 		$this->db->join('manage_package','book_package.package_id = manage_package.package_id');
-// 		$this->db->join('member','member.member_id = book_package.patient_id');
-// 		$this->db->where("((member.status = '0' OR member.status = '1'))");
-// 		$this->db->order_by('book_package.package_id', 'DESC');
-// 		$data['manage_package'] = $this->db->get()->result_array();
-
-        $this->db->select('package_booking.*,book_package.*,member.member_id,member.name,manage_package.package_name,user_type.user_type_name');
-		$this->db->from('package_booking');
-        $this->db->join('book_package','book_package.book_package_id = package_booking.book_package_id');
+		$this->db->select('book_package.*,member.name,manage_package.package_name,user_type.user_type_name');
+		$this->db->from('book_package');
 		$this->db->join('manage_package','book_package.package_id = manage_package.package_id');
-		$this->db->join('user_type','user_type.user_type_id = book_package.service_id');
+        $this->db->join('user_type','user_type.user_type_id = book_package.service_id');
 		$this->db->join('member','member.member_id = book_package.patient_id');
-		//$this->db->where('book_package.user_id',$this->session->userdata('user')['user_id']);
-		 $this->db->where("((member.status = '0' OR member.status = '1'))");
-		//$this->db->where('member.status','1');
-		//$this->db->or_where('member.status','0'); 
-		$this->db->order_by('book_package.book_package_id', 'DESC');							
+		$this->db->where("((member.status = '0' OR member.status = '1'))");
+		$this->db->order_by('book_package.book_package_id', 'DESC');
 		$data['manage_package'] = $this->db->get()->result_array();
+
+        // $this->db->select('package_booking.*,book_package.*,member.member_id,member.name,manage_package.package_name,user_type.user_type_name');
+		// $this->db->from('book_package');
+        // $this->db->join('package_booking','package_booking.book_package_id = book_package.book_package_id');
+		// $this->db->join('manage_package','book_package.package_id = manage_package.package_id');
+		// $this->db->join('user_type','user_type.user_type_id = book_package.service_id');
+		// $this->db->join('member','member.member_id = book_package.patient_id');
+		
+        //$this->db->where('book_package.user_id',$this->session->userdata('user')['user_id']);
+		
+        // $this->db->where("((member.status = '0' OR member.status = '1'))");
+		
+        //$this->db->where('member.status','1');
+		//$this->db->or_where('member.status','0'); 
+		
+        // $this->db->order_by('book_package.book_package_id', 'DESC');							
+		// $data['manage_package'] = $this->db->get()->result_array();
 
 		$this->db->select('employee_master.*,user_type.user_type_name');
         $this->db->from('employee_master');

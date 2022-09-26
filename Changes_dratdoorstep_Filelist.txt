@@ -1,21 +1,19 @@
-- application/controllers/admin/AppointmentList.php
+- application/controllers/admin/AppointmentList.php - DONE
 
-- application/views/admin/listAppointment.php
+- application/controllers/admin/BookPackage.php - DONE
 
-- application/controllers/admin/BookPackage.php
+- application/controllers/admin/PackageBook.php - DONE
 
-- application/controllers/admin/PackageBook.php
+- application/views/admin/listAppointment.php - DONE
 
-- application/views/admin/list_book_package.php
-
-- application/controllers/admin/AppointmentList.php
+- application/views/admin/list_book_package.php - DONE
 
 => FOR REPORT:-
 
-- application/controllers/admin/AllPatientReport.php
+- application/controllers/admin/AllPatientReport.php - DONE
 
-- application/views/admin/AllPatientReport.php
+- application/views/admin/AllPatientReport.php - DONE
 
-- routes.php
+- routes.php - DONE
 
-- application/views/admin/header.php
+- application/views/admin/header.php - DONE

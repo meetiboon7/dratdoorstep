@@ -52,19 +52,19 @@
 													?>
 												<tr>
 
-													<td><?php echo $package['name'].$package['member_id']; ?></td>
+													<td><?php echo $package['name']; ?></td>
 													<td><?php echo $package['package_name']; ?></td>
 													<td><?php echo date("d-m-Y",strtotime($package['purchase_date'])); ?></td>
 													<td><?php echo $package['total']; ?></td>
 													<td>
 													    <!--Reciept Start-->
 													     <button  formaction="<?php echo base_url(); ?>adminPackageRecipt" name="book_package_id" 
-													      value="<?php echo $package['id']; ?>"  class="btn btn-secondary" title="View Invoice">Receipt
+													      value="<?php echo $package['book_package_id']; ?>"  class="btn btn-secondary" title="View Invoice">Receipt
 													      </button>
 													      <!--Reciept End -->
 													      
 													      <!--View Package-->
-													      <button formaction="<?php echo base_url(); ?>view_package" name="btn_view_mypackage" value="<?php echo $package['id']; ?>"  class="btn btn-sm btn-clean btn-icon mr-2" title="View Package">
+													      <button formaction="<?php echo base_url(); ?>view_package" name="btn_view_mypackage" value="<?php echo $package['book_package_id']; ?>"  class="btn btn-sm btn-clean btn-icon mr-2" title="View Package">
 
 														    <i class="fa fa-eye" aria-hidden="true"></i>
 
@@ -73,10 +73,10 @@
 														  
 														  <!--Assing Edit Package-->
 														  <?php
-														   if($package['id']!='' && $package['responsestatus']!="TXN_FAILURE" && $package['responsestatus']!="TXN_CANCELLED" && $package['responsestatus']!="")
+														   if($package['book_package_id']!='' && $package['responsestatus']!="TXN_FAILURE" && $package['responsestatus']!="TXN_CANCELLED" && $package['responsestatus']!="")
 														   {	   	
 														?>
-														<a href="#" class="btn btn-sm btn-clean btn-icon mr-2 btn-assign" data-id="<?php echo $package['id'];?>,<?php echo "1";?>" title="Assign" >
+														<a href="#" class="btn btn-sm btn-clean btn-icon mr-2 btn-assign" data-id="<?php echo $package['book_package_id'];?>,<?php echo "1";?>" title="Assign" >
 
 																			<span class="svg-icon svg-icon-primary svg-icon-2x">
 																				<!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2020-12-28-020759/theme/html/demo1/dist/../src/media/svg/icons/Communication/Share.svg-->

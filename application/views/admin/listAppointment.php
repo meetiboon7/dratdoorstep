@@ -74,7 +74,7 @@
 											<?php
 											}
 
-											if ($appointment['id'] != '') {
+											if ($appointment['book_package_id'] != '') {
 											?>
 												<img src="<?php echo base_url() ?>uploads/image/Group 1576.svg" class="h-75 align-self-end" />
 											<?php
@@ -94,7 +94,7 @@
 										?>
 									</div>
 									<?php
-									if ($appointment['id'] != '') {
+									if ($appointment['book_package_id'] != '') {
 									?>
 										<span class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"><?php echo $appointment['package_name'] ?></span>
 									<?php
@@ -194,7 +194,7 @@
 								<?php
 								// echo $appointment['id'];
 								// exit;
-								if ($appointment['appointment_book_id'] != '' || $appointment['book_nurse_id'] != '' || $appointment['book_laboratory_test_id'] != '' || $appointment['id'] != '') {
+								if ($appointment['appointment_book_id'] != '' || $appointment['book_nurse_id'] != '' || $appointment['book_laboratory_test_id'] != '' || $appointment['book_package_id'] != '') {
 								?>
 									<td>
 										<?php
@@ -318,11 +318,11 @@
 												}
 
 
-												if ($appointment['id'] != '') {
+												if ($appointment['book_package_id'] != '') {
 													if ($appointment['responsestatus'] != 'TXN_FAILURE') {
 													?>
 
-														<button formaction="<?php echo base_url(); ?>cancle_appoinment" name="id" value="<?php echo $appointment['id']; ?>" class="btn btn-danger" title="Cancel Appointment">
+														<button formaction="<?php echo base_url(); ?>cancle_appoinment" name="id" value="<?php echo $appointment['book_package_id']; ?>" class="btn btn-danger" title="Cancel Appointment">
 
 															Cancel
 
@@ -485,7 +485,7 @@
 										?>
 
 										<?php
-										if ($appointment['id'] != '') {
+										if ($appointment['book_package_id'] != '') {
 										?>
 											<?php
 											if ($appointment['responsestatus'] == "TXN_SUCCESS") {
@@ -829,9 +829,9 @@
 
 
 									<?php
-									if ($appointment['id'] != '' && $appointment['responsestatus'] != "TXN_FAILURE" && $appointment['responsestatus'] != "TXN_CANCELLED" && $appointment['responsestatus'] != "") {
+									if ($appointment['book_package_id'] != '' && $appointment['responsestatus'] != "TXN_FAILURE" && $appointment['responsestatus'] != "TXN_CANCELLED" && $appointment['responsestatus'] != "") {
 									?>
-										<a href="#" class="btn btn-sm btn-clean btn-icon mr-2 btn-assign" data-id="<?php echo $appointment['id']; ?>,<?php echo "6"; ?>" title="Assign">
+										<a href="#" class="btn btn-sm btn-clean btn-icon mr-2 btn-assign" data-id="<?php echo $appointment['book_package_id']; ?>,<?php echo "6"; ?>" title="Assign">
 
 											<span class="svg-icon svg-icon-primary svg-icon-2x">
 												<!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2020-12-28-020759/theme/html/demo1/dist/../src/media/svg/icons/Communication/Share.svg-->
@@ -847,7 +847,7 @@
 									<?php
 									}
 									?>
-									<button formaction="<?php echo base_url(); ?>viewAdminBookingHistory" name="btn_appointment_assign" value="<?php echo $appointment['id']; ?>,<?php echo "6"; ?>" class="btn btn-sm btn-clean btn-icon mr-2" title="View Package">
+									<button formaction="<?php echo base_url(); ?>viewAdminBookingHistory" name="btn_appointment_assign" value="<?php echo $appointment['book_package_id']; ?>,<?php echo "6"; ?>" class="btn btn-sm btn-clean btn-icon mr-2" title="View Package">
 										<i class="fa fa-eye" aria-hidden="true"></i>
 									</button>
 									<!-- <button formaction="<?php echo base_url(); ?>viewAdminBookingHistory" name="btn_appointment_assign" value="<?php echo $appointment['appointment_book_id']; ?>,<?php echo "1"; ?>" class="btn btn-sm btn-clean btn-icon mr-2" title="View Package">
